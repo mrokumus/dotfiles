@@ -3,6 +3,10 @@ dot_Brewfile
 dot_config/karabiner
 {{- end }}
 
-{{- if not (or (eq .chezmoi.osRelease.ID "arch") (eq .chezmoi.osRelease.ID "cachyos")) }}
-packages-arch.txt
+{{- if ne .chezmoi.os "linux" }}
+dot_config/hypr
+dot_config/waybar
+dot_config/wofi
+dot_config/mako
+dot_config/keyd
 {{- end }}
