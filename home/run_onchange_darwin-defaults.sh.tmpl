@@ -37,6 +37,25 @@ defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
 # Avoid .DS_Store on network drives
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
+# ─── Flycut ──────────────────────────────────────────────────────────────────
+defaults write com.generalarcade.flycut rememberNum -int 99
+defaults write com.generalarcade.flycut removeDuplicates -bool true
+defaults write com.generalarcade.flycut menuIcon -int 3
+defaults write com.generalarcade.flycut suppressAccessibilityAlert -bool true
+
+# ─── Stats ───────────────────────────────────────────────────────────────────
+defaults write eu.exelban.Stats CPU_widget -string "mini"
+defaults write eu.exelban.Stats GPU_widget -string "mini"
+defaults write eu.exelban.Stats GPU_state -int 1
+defaults write eu.exelban.Stats Battery_widget -string "battery"
+defaults write eu.exelban.Stats Battery_battery_additional -string "innerPercentage"
+defaults write eu.exelban.Stats Battery_battery_color -int 1
+defaults write eu.exelban.Stats CombinedModules -int 1
+defaults write eu.exelban.Stats CombinedModules_spacing -string "none"
+defaults write eu.exelban.Stats dockIcon -int 0
+defaults write eu.exelban.Stats temperature_units -string "celsius"
+defaults write eu.exelban.Stats LaunchAtLoginNext -int 1
+
 # Restart affected services
 killall Dock
 killall Finder
