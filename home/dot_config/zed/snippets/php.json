@@ -1,0 +1,35 @@
+{
+  "Inline PHP echo": {
+    "prefix": "pee",
+    "body": "<?php echo $1 ?>",
+    "description": "Inline php echo with php tags"
+  },
+  "Pretty print with exit": {
+    "prefix": "pr",
+    "body": [
+      "echo '<pre>';",
+      "print_r($1);",
+      "echo '</pre>';",
+      "exit;"
+    ],
+    "description": "Pretty print with exit"
+  },
+  "PHP foreach": {
+    "prefix": "pfe",
+    "body": [
+      "<?php foreach($1 as $2): ?>",
+      "    $0",
+      "<?php endforeach; ?>"
+    ],
+    "description": "PHP foreach template"
+  },
+  "PHP if": {
+    "prefix": "pif",
+    "body": [
+      "<?php if($1): ?>",
+      "    $0",
+      "<?php endif; ?>"
+    ],
+    "description": "PHP if template"
+  }
+}

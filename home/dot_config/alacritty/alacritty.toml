@@ -1,0 +1,74 @@
+[general]
+import = [
+    "~/.config/alacritty/themes/dracula.toml"
+]
+working_directory = "~"
+
+[env]
+TERM = "alacritty"
+
+[terminal]
+shell = { program = "/bin/zsh", args = ["-l", "-i", "-c", "~/.config/tmux/start_tmux.sh"] }
+osc52 = "CopyPaste"
+
+[window]
+dimensions = { columns = 130, lines = 40 }
+decorations = "Full" 
+startup_mode = "Windowed"
+opacity = 0.3
+blur = true
+option_as_alt = "Both" 
+
+[scrolling]
+history = 0 
+multiplier = 3
+
+[font]
+size = 16
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "Regular"
+
+[font.bold]
+family = "JetBrainsMono Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+style = "Italic"
+
+[cursor]
+style = { shape = "Block", blinking = "On" }
+unfocused_hollow = true
+
+[selection]
+save_to_clipboard = true
+
+[mouse]
+hide_when_typing = true
+
+[[keyboard.bindings]]
+key = "N"
+mods = "Command"
+action = "SpawnNewInstance"
+
+[[keyboard.bindings]]
+key = "Enter"
+mods = "Command"
+action = "ToggleFullscreen"
+
+[[keyboard.bindings]]
+key = "Key0"
+mods = "Command"
+action = "ResetFontSize"
+
+[[keyboard.bindings]]
+key = "Equals"
+mods = "Command"
+action = "IncreaseFontSize"
+
+[[keyboard.bindings]]
+key = "Minus"
+mods = "Command"
+action = "DecreaseFontSize"

@@ -1,0 +1,172 @@
+{
+  "outline_panel": {
+    "dock": "left"
+  },
+  "collaboration_panel": {
+    "dock": "left"
+  },
+  "agent": {
+    "dock": "right",
+    "favorite_models": [],
+    "model_parameters": []
+  },
+  "agent_servers": {
+    "codex-acp": {
+      "type": "registry"
+    }
+  },
+  "tab_bar": {
+    "show_pinned_tabs_in_separate_row": false
+  },
+  "restore_on_startup": "launchpad",
+  "buffer_font_weight": 400.0,
+  "ui_font_weight": 600.0,
+  "ui_font_family": "Corsiva Hebrew",
+  "buffer_line_height": "comfortable",
+  "edit_predictions": {
+    "provider": "none"
+  },
+  "git": {
+    "inline_blame": {
+      "show_commit_summary": true,
+      "enabled": true
+    }
+  },
+  "git_panel": {
+    "dock": "left",
+    "sort_by_path": false,
+    "tree_view": true
+  },
+  "autosave": "off",
+  "formatter": "language_server",
+  "format_on_save": "on",
+  "buffer_font_family": "Corsiva Hebrew",
+  "vim_mode": false,
+  "icon_theme": "JetBrains New UI Icons (Dark)",
+  "telemetry": {
+    "diagnostics": true,
+    "metrics": false,
+  },
+  "session": {
+    "trust_all_worktrees": true,
+  },
+  "base_keymap": "JetBrains",
+  "buffer_font_size": 18.0,
+  "theme": "One Dark",
+  "auto_update": true,
+  "close_on_file_delete": true,
+  "cursor_shape": "bar",
+  "document_folding_ranges": "on",
+  "terminal": {
+    "cursor_shape": "bar",
+    "blinking": "on",
+    "font_size": 16,
+    "font_family": "D2CodingLigature Nerd Font",
+    "scrollbar": {
+      "show": "never"
+    }
+  },
+  "project_panel": {
+    "hide_hidden": false,
+    "diagnostic_badges": true,
+    "hide_gitignore": false,
+    "auto_reveal_entries": false,
+    "dock": "right",
+    "button": true,
+    "default_width": 100.0,
+    "entry_spacing": "comfortable",
+    "file_icons": true,
+    "folder_icons": true,
+    "git_status": true,
+    "indent_size": 20,
+    "auto_fold_dirs": true,
+    "bold_folder_labels": true,
+    "drag_and_drop": true,
+    "starts_open": false,
+    "auto_open": {
+      "on_create": true,
+      "on_drop": true,
+      "on_paste": true,
+    },
+    "hide_root": true,
+    "indent_guides": {
+      "show": "always",
+    },
+    "show_diagnostics": "all",
+    "sticky_scroll": true,
+    "sort_mode": "directories_first",
+    "scrollbar": {
+      "show": "never"
+    },
+  },
+  "languages": {
+    "PHP": {
+      "language_servers": [
+        "phpcs",
+        "intelephense",
+        "phpactor"
+      ],
+    },
+    "JavaScript": {
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true,
+      },
+    },
+    "TypeScript": {
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true,
+      },
+    },
+    "JSON": {
+      "tab_size": 2,
+      "format_on_save": "on",
+    },
+    "Markdown": {
+      "format_on_save": "on",
+    },
+    "SQL": {
+      "formatter": {
+        "external": {
+          "command": "sql-formatter",
+          "arguments": [
+            "--language",
+            "mysql"
+          ],
+        },
+      },
+    },
+  },
+  "lsp": {
+    "tailwindcss-language-server": {
+      "settings": {
+        "classFunctions": [
+          "cva",
+          "cx"
+        ],
+        "includeLanguages": {
+          "php": "html",
+          "blade": "html",
+        },
+        "experimental": {
+          "classRegex": [
+            // PHP
+            "class=\"([^\"]*)\"",
+            "class='([^']*)'",
+            "class=\\\"([^\\\"]*)\\\"",
+            "@class\\(\\[([^\\]]*)\\]\\)",
+            // // JavaScript - TypeScript
+            "\\.className\\s*[+]?=\\s*['\"]([^'\"]*)['\"]",
+            "\\.setAttributeNS\\(.*,\\s*['\"]class['\"],\\s*['\"]([^'\"]*)['\"]",
+            "\\.setAttribute\\(['\"]class['\"],\\s*['\"]([^'\"]*)['\"]",
+            "\\.classList\\.add\\(['\"]([^'\"]*)['\"]",
+            "\\.classList\\.remove\\(['\"]([^'\"]*)['\"]",
+            "\\.classList\\.toggle\\(['\"]([^'\"]*)['\"]",
+            "\\.classList\\.contains\\(['\"]([^'\"]*)['\"]",
+            "\\.classList\\.replace\\(\\s*['\"]([^'\"]*)['\"]",
+            "\\.classList\\.replace\\([^,)]+,\\s*['\"]([^'\"]*)['\"]",
+          ],
+        },
+      },
+    },
+  },
+}
