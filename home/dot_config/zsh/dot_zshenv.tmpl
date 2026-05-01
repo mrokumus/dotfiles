@@ -1,0 +1,55 @@
+# XDG
+export ZDOTDIR="$HOME/.config/zsh"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+
+# Tools
+export EDITOR="nvim"
+export VISUAL="nvim"
+export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+export GIT_CONFIG_GLOBAL="$HOME/.config/git/.gitconfig"
+export GOPATH="$HOME/go"
+export NVM_DIR="$HOME/.nvm"
+
+# Locale
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
+
+# History
+export HISTORY_IGNORE="(ls|cd|pwd|exit|history|cd -|cd ..)"
+
+# Path — common
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.config/scripts:$PATH"
+export PATH="$GOPATH/bin:$PATH"
+export PATH="$HOME/.config/composer/vendor/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="$HOME/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+
+{{ if eq .chezmoi.os "darwin" -}}
+# Path — macOS (Homebrew)
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+export PATH="/opt/homebrew/bin/composer:$PATH"
+
+# NVM — Homebrew
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+{{ else -}}
+# NVM — Linux
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+{{ end -}}
+
+# Cargo
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+

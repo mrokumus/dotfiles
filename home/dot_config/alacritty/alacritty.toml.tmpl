@@ -13,14 +13,18 @@ osc52 = "CopyPaste"
 
 [window]
 dimensions = { columns = 130, lines = 40 }
-decorations = "Full" 
 startup_mode = "Windowed"
 opacity = 0.3
+{{ if eq .chezmoi.os "darwin" -}}
+decorations = "Full"
 blur = true
-option_as_alt = "Both" 
+option_as_alt = "Both"
+{{ else -}}
+decorations = "None"
+{{ end -}}
 
 [scrolling]
-history = 0 
+history = 0
 multiplier = 3
 
 [font]
@@ -48,6 +52,8 @@ save_to_clipboard = true
 [mouse]
 hide_when_typing = true
 
+{{ if eq .chezmoi.os "darwin" -}}
+# macOS — physical Ctrl sends Command after Karabiner swap
 [[keyboard.bindings]]
 key = "N"
 mods = "Command"
@@ -72,3 +78,30 @@ action = "IncreaseFontSize"
 key = "Minus"
 mods = "Command"
 action = "DecreaseFontSize"
+{{ else -}}
+# Linux — Ctrl is native
+[[keyboard.bindings]]
+key = "N"
+mods = "Control"
+action = "SpawnNewInstance"
+
+[[keyboard.bindings]]
+key = "Enter"
+mods = "Control"
+action = "ToggleFullscreen"
+
+[[keyboard.bindings]]
+key = "Key0"
+mods = "Control"
+action = "ResetFontSize"
+
+[[keyboard.bindings]]
+key = "Equals"
+mods = "Control"
+action = "IncreaseFontSize"
+
+[[keyboard.bindings]]
+key = "Minus"
+mods = "Control"
+action = "DecreaseFontSize"
+{{ end -}}
