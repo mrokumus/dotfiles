@@ -1,10 +1,11 @@
 [include]
     path = ~/.config/git/personal
 
-[includeIf "gitdir:/Users/rasit/Jotform/**"]
-    path = ~/.config/git/work
+[includeIf "gitdir:~/Jotform/**"]
+    path = ~/.config/jotform-private/git/work
 
 [include]
     path = ~/.config/git/delta
+
 [init]
-	defaultBranch = main
+    defaultBranch = mainjk
