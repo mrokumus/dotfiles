@@ -1,0 +1,12 @@
+# Chezmoi state files (auto-managed)
+.chezmoistate
+.chezmoiscriptstate
+
+# Editor swap files
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS artifacts
+Thumbs.db
