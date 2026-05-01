@@ -1,0 +1,5 @@
+require("core.keymaps")
+require("core.options")
+require("core.netrw")
+require("core.lazy")
+require("plugins")
