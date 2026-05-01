@@ -4,7 +4,7 @@ Cross-platform dotfiles managed with [chezmoi](https://chezmoi.io/).
 
 ## Supported environments
 
-- **macOS** — personal + work (Jotform)
+- **macOS** — personal + work
 - **Arch Linux / CachyOS** — personal
 
 ## Quick start
@@ -41,7 +41,7 @@ is controlled by `.chezmoiignore` and template (`.tmpl`) files.
 | `dot_Brewfile` | darwin-only | Homebrew packages |
 | `dot_zshrc` | common | Root `.zshrc` (sources `~/.config/zsh`) |
 | `run_onchange_darwin-defaults.sh.tmpl` | darwin-only | macOS system prefs + app defaults |
-| `.chezmoiexternal.toml.tmpl` | — | Tmux plugins + Jotform private repo |
+| `.chezmoiexternal.toml.tmpl` | — | Tmux plugins |
 | `.chezmoiignore` | — | OS-based file filtering |
 
 ### Categories
