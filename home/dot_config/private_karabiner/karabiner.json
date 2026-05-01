@@ -2,6 +2,29 @@
     "global": { "show_in_menu_bar": false },
     "profiles": [
         {
+            "name": "LinuxDev",
+            "simple_modifications": [
+                {
+                    "from": { "key_code": "left_command" },
+                    "to": [{ "key_code": "left_control" }]
+                },
+                {
+                    "from": { "key_code": "left_control" },
+                    "to": [{ "key_code": "left_command" }]
+                },
+                {
+                    "from": { "key_code": "right_command" },
+                    "to": [{ "key_code": "right_control" }]
+                },
+                {
+                    "from": { "key_code": "right_control" },
+                    "to": [{ "key_code": "right_command" }]
+                },
+                {
+                    "from": { "key_code": "non_us_backslash" },
+                    "to": [{ "key_code": "grave_accent_and_tilde" }]
+                }
+            ],
             "complex_modifications": {
                 "parameters": {
                     "basic.to_if_alone_timeout_milliseconds": 300,
@@ -9,13 +32,13 @@
                 },
                 "rules": [
                     {
-                        "description": "Change right_command+hjkl to arrow keys",
+                        "description": "Right Cmd + hjkl → arrow keys (physical right_cmd = right_ctrl after swap)",
                         "manipulators": [
                             {
                                 "from": {
                                     "key_code": "h",
                                     "modifiers": {
-                                        "mandatory": ["right_command"],
+                                        "mandatory": ["right_control"],
                                         "optional": ["any"]
                                     }
                                 },
@@ -26,7 +49,7 @@
                                 "from": {
                                     "key_code": "j",
                                     "modifiers": {
-                                        "mandatory": ["right_command"],
+                                        "mandatory": ["right_control"],
                                         "optional": ["any"]
                                     }
                                 },
@@ -37,7 +60,7 @@
                                 "from": {
                                     "key_code": "k",
                                     "modifiers": {
-                                        "mandatory": ["right_command"],
+                                        "mandatory": ["right_control"],
                                         "optional": ["any"]
                                     }
                                 },
@@ -48,7 +71,7 @@
                                 "from": {
                                     "key_code": "l",
                                     "modifiers": {
-                                        "mandatory": ["right_command"],
+                                        "mandatory": ["right_control"],
                                         "optional": ["any"]
                                     }
                                 },
@@ -70,10 +93,9 @@
                     }
                 ]
             },
-            "name": "LinuxDev",
             "virtual_hid_keyboard": {
                 "country_code": 0,
-                "keyboard_type_v2": "ansi"
+                "keyboard_type_v2": "iso"
             }
         }
     ]
