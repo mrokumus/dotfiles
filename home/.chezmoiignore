@@ -11,6 +11,6 @@ dot_config/mako
 dot_config/keyd
 {{- end }}
 
-{{- if not (or (eq .chezmoi.osRelease.ID "arch") (eq .chezmoi.osRelease.ID "cachyos") (eq .chezmoi.osRelease.ID "manjaro")) }}
+{{- if not (or (eq .chezmoi.osRelease.id "arch") (eq .chezmoi.osRelease.id "cachyos") (eq .chezmoi.osRelease.id "manjaro")) }}
 packages-arch.txt
 {{- end }}
