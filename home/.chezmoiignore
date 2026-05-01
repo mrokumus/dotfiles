@@ -10,3 +10,7 @@ dot_config/wofi
 dot_config/mako
 dot_config/keyd
 {{- end }}
+
+{{- if not (or (eq .chezmoi.osRelease.ID "arch") (eq .chezmoi.osRelease.ID "cachyos") (eq .chezmoi.osRelease.ID "manjaro")) }}
+packages-arch.txt
+{{- end }}
