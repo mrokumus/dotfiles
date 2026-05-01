@@ -1,29 +1,8 @@
-{{/*
-  .chezmoiignore — this template is rendered separately on each machine.
-  The render output lists which source files should NOT be applied.
-
-  Logic: list files to IGNORE on the current machine.
-  Example: if OS is not darwin → list Mac-only files (so they get ignored).
-*/}}
-
-{{/* === Ignore Mac-only files when not on macOS === */}}
 {{- if ne .chezmoi.os "darwin" }}
 dot_Brewfile
 dot_config/karabiner
 {{- end }}
 
-{{/* === Ignore Linux-only files when not on Linux === */}}
-{{- if ne .chezmoi.os "linux" }}
-dot_config/hypr
-dot_config/waybar
-dot_config/wofi
-dot_config/mako
-dot_config/keyd
-{{- end }}
-
-{{/* === Ignore Arch-family files outside Arch family === */}}
-{{- if not (or (eq .chezmoi.osRelease.ID "arch")
-               (eq .chezmoi.osRelease.ID "cachyos")
-               (eq .chezmoi.osRelease.ID "manjaro")) }}
+{{- if not (or (eq .chezmoi.osRelease.ID "arch") (eq .chezmoi.osRelease.ID "cachyos")) }}
 packages-arch.txt
 {{- end }}
