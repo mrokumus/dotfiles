@@ -1,0 +1,14 @@
+# Import Constants
+[ -f "$HOME/.config/zsh/constants.zsh" ] && source "$HOME/.config/zsh/constants.zsh"
+
+# Import Aliases
+[ -f "$HOME/.config/zsh/aliases.zsh" ] && source "$HOME/.config/zsh/aliases.zsh"
+
+# Import Work Configurations
+[ -f "$HOME/.config/jotform-private/work.zsh" ] && source "$HOME/.config/jotform-private/work.zsh"
+
+# Import Functions
+[ -f "$HOME/.config/zsh/functions.zsh" ] && source "$HOME/.config/zsh/functions.zsh"
+
+# Initialize Starship prompt
+eval "$(starship init zsh)"
