@@ -50,7 +50,7 @@ apply_dotfiles() {
 # ─── macOS packages ─────────────────────────────────────────────────────────
 install_mac_packages() {
   info "Installing packages from Brewfile..."
-  brew bundle --file="$HOME/.Brewfile" --no-lock
+  brew bundle --file="$HOME/.Brewfile" 
   success "Brewfile packages installed"
 }
 
