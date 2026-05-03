@@ -28,7 +28,7 @@
                 },
                 "rules": [
                     {
-                        "description": "ISO key (§/±) → backtick/tilde",
+                        "description": "ISO physical key (§/±) → ANSI backtick/tilde",
                         "manipulators": [
                             {
                                 "from": {
@@ -122,7 +122,7 @@
             },
             "virtual_hid_keyboard": {
                 "country_code": 0,
-                "keyboard_type_v2": "iso"
+                "keyboard_type_v2": "ansi"
             }
         }
     ]
