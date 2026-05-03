@@ -1,0 +1,31 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Install/update Homebrew packages automatically when Brewfiles change.
+# This runs through chezmoi, so machine-specific Brewfiles can stay in
+# external private repos while the public bootstrap remains generic.
+
+if ! command -v brew >/dev/null 2>&1; then
+  echo "[brew-bundle] Homebrew not found, skipping."
+  exit 0
+fi
+
+run_bundle() {
+  local file="$1"
+  local label="$2"
+
+  if [[ -f "$file" ]]; then
+    echo "[brew-bundle] Installing $label packages from $file"
+    brew bundle --file="$file"
+  fi
+}
+
+run_bundle "$HOME/.Brewfile" "common"
+
+{{- if eq .chezmoi.hostname "jotform" }}
+run_bundle "$HOME/.config/jotform-private/Brewfile" "Jotform-only"
+{{- else }}
+run_bundle "$HOME/.config/personal-private/Brewfile" "personal-only"
+{{- end }}
+{{- end }}
