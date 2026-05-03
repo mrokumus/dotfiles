@@ -8,4 +8,4 @@
     path = ~/.config/git/delta
 
 [init]
-    defaultBranch = mainjk
+    defaultBranch = main
