@@ -1,10 +1,17 @@
 {{- if eq .chezmoi.os "darwin" -}}
-#!/bin/bash
-# macOS defaults — runs once, re-runs if this file changes
+#!/usr/bin/env bash
+set -euo pipefail
 
-# Trackpad
+# macOS defaults — runs once, re-runs if this file changes.
+# Some trackpad settings need both global and current-host domains.
+
+# Trackpad / mouse
+defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
+defaults -currentHost write com.apple.AppleMultitouchTrackpad Clicking -bool true
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults -currentHost write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 defaults write NSGlobalDomain com.apple.trackpad.scaling -float 1.5
 
 # Keyboard
@@ -37,13 +44,13 @@ defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
 # Avoid .DS_Store on network drives
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
-# ─── Flycut ──────────────────────────────────────────────────────────────────
+# Flycut
 defaults write com.generalarcade.flycut rememberNum -int 99
 defaults write com.generalarcade.flycut removeDuplicates -bool true
 defaults write com.generalarcade.flycut menuIcon -int 3
 defaults write com.generalarcade.flycut suppressAccessibilityAlert -bool true
 
-# ─── Stats ───────────────────────────────────────────────────────────────────
+# Stats
 defaults write eu.exelban.Stats CPU_widget -string "mini"
 defaults write eu.exelban.Stats GPU_widget -string "mini"
 defaults write eu.exelban.Stats GPU_state -int 1
@@ -57,7 +64,8 @@ defaults write eu.exelban.Stats temperature_units -string "celsius"
 defaults write eu.exelban.Stats LaunchAtLoginNext -int 1
 
 # Restart affected services
-killall Dock
-killall Finder
-killall SystemUIServer
+killall cfprefsd || true
+killall Dock || true
+killall Finder || true
+killall SystemUIServer || true
 {{- end }}
