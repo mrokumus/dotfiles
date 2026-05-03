@@ -1,0 +1,107 @@
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "JetBrainsMono Nerd Font", "Noto Sans", sans-serif;
+  font-size: 12px;
+  min-height: 0;
+}
+
+window#waybar {
+  background: transparent;
+  color: #c6d0f5;
+}
+
+.modules-left,
+.modules-center,
+.modules-right {
+  background: rgba(35, 38, 52, 0.72);
+  border: 1px solid rgba(198, 208, 245, 0.12);
+  border-radius: 14px;
+  padding: 0 8px;
+  min-height: 28px;
+}
+
+#custom-apple,
+#workspaces,
+#window,
+#clock,
+#tray,
+#network,
+#pulseaudio,
+#cpu,
+#memory,
+#custom-power {
+  padding: 0 8px;
+  margin: 0 1px;
+}
+
+#custom-apple {
+  color: #babbf1;
+  font-size: 15px;
+  padding-left: 6px;
+  padding-right: 10px;
+}
+
+#workspaces {
+  padding: 0 4px;
+}
+
+#workspaces button {
+  color: #838ba7;
+  background: transparent;
+  border-radius: 10px;
+  padding: 0 8px;
+  margin: 3px 1px;
+  min-width: 18px;
+}
+
+#workspaces button.active {
+  color: #232634;
+  background: #babbf1;
+}
+
+#workspaces button:hover {
+  color: #c6d0f5;
+  background: rgba(198, 208, 245, 0.12);
+}
+
+#window {
+  color: #a5adce;
+}
+
+#clock {
+  color: #c6d0f5;
+  font-weight: 600;
+}
+
+#tray {
+  padding-right: 6px;
+}
+
+#network {
+  color: #99d1db;
+}
+
+#pulseaudio {
+  color: #a6d189;
+}
+
+#cpu {
+  color: #e5c890;
+}
+
+#memory {
+  color: #ef9f76;
+}
+
+#custom-power {
+  color: #e78284;
+  font-size: 13px;
+  padding-right: 6px;
+}
+
+#custom-power:hover {
+  color: #232634;
+  background: #e78284;
+  border-radius: 10px;
+}
