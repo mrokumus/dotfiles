@@ -1,6 +1,6 @@
 {{- if ne .chezmoi.os "darwin" }}
 dot_Brewfile
-dot_config/karabiner
+dot_config/private_karabiner
 {{- end }}
 
 {{- if ne .chezmoi.os "linux" }}
@@ -9,6 +9,7 @@ dot_config/waybar
 dot_config/wofi
 dot_config/mako
 dot_config/keyd
+packages-arch.txt
 {{- end }}
 
 {{- if eq .chezmoi.os "linux" }}
