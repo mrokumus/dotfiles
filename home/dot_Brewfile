@@ -37,14 +37,19 @@ cask "insomnia"
 cask "podman-desktop"
 cask "tableplus"
 
-# Utilities
+# Productivity & launchers
+cask "raycast"
+cask "rectangle"
+
+# Clipboard & screenshots
+cask "flycut"
+cask "shottr"
+
+# System utilities
 cask "appcleaner"
 cask "bitwarden"
-cask "flycut"
 cask "karabiner-elements"
 cask "mullvad-vpn"
-cask "rectangle"
-cask "shottr"
 cask "stats"
 
 # Apps
