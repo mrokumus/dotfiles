@@ -33,6 +33,7 @@ install_chezmoi() {
       brew install chezmoi
     else
       sh -c "$(curl -fsLS get.chezmoi.io)" -- -b ~/.local/bin
+      export PATH="$HOME/.local/bin:$PATH"
     fi
     success "chezmoi installed"
   else
@@ -49,9 +50,17 @@ apply_dotfiles() {
 
 # ─── macOS packages ─────────────────────────────────────────────────────────
 install_mac_packages() {
-  info "Installing packages from Brewfile..."
-  brew bundle --file="$HOME/.Brewfile" 
-  success "Brewfile packages installed"
+  if [[ -f "$HOME/.Brewfile" ]]; then
+    info "Installing packages from Brewfile..."
+    brew bundle --file="$HOME/.Brewfile"
+    success "Brewfile packages installed"
+  fi
+
+  if [[ -f "$HOME/.config/jotform-private/Brewfile" ]]; then
+    info "Installing Jotform-only packages..."
+    brew bundle --file="$HOME/.config/jotform-private/Brewfile"
+    success "Jotform Brewfile packages installed"
+  fi
 }
 
 # ─── Arch Linux packages ────────────────────────────────────────────────────
