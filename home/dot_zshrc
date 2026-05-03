@@ -1,1 +1,8 @@
-source "$HOME/.config/zsh/.zshenv"
+# Root zsh entrypoint.
+# Load XDG/zsh environment first, then the real interactive config under ~/.config/zsh.
+
+ZSH_ENV="$HOME/.config/zsh/.zshenv"
+ZSH_RC="$HOME/.config/zsh/.zshrc"
+
+[ -f "$ZSH_ENV" ] && source "$ZSH_ENV"
+[ -f "$ZSH_RC" ] && source "$ZSH_RC"
