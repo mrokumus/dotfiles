@@ -8,13 +8,15 @@ working_directory = "~"
 TERM = "alacritty"
 
 [terminal]
-shell = { program = "/bin/zsh", args = ["-l", "-i", "-c", "~/.config/tmux/start_tmux.sh"] }
+# Do not force tmux on terminal startup.
+# Start tmux manually with `tmux` when you need sessions/panes.
+shell = { program = "/bin/zsh", args = ["-l"] }
 osc52 = "CopyPaste"
 
 [window]
 dimensions = { columns = 130, lines = 40 }
 startup_mode = "Windowed"
-opacity = 0.3
+opacity = 0.9
 {{ if eq .chezmoi.os "darwin" -}}
 decorations = "Full"
 blur = true
@@ -24,7 +26,7 @@ decorations = "None"
 {{ end -}}
 
 [scrolling]
-history = 0
+history = 10000
 multiplier = 3
 
 [font]
