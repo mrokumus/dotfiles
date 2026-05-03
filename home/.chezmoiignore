@@ -3,35 +3,45 @@
 dot_config/nvim/lazy-lock.json
 
 {{- if ne .chezmoi.os "darwin" }}
-dot_Brewfile
+# macOS-only files
 .Brewfile
+dot_Brewfile
+.config/karabiner
+.config/karabiner/**
 dot_config/private_karabiner
 dot_config/private_karabiner/**
-.config/private_karabiner
-.config/private_karabiner/**
+.config/personal-private
+.config/personal-private/**
+dot_config/private_personal-private
+dot_config/private_personal-private/**
+.config/scripts/dump-macos-settings.sh
+dot_config/scripts/dump-macos-settings.sh
+run_onchange_darwin-*.sh.tmpl
+darwin-*.sh
 {{- end }}
 
 {{- if ne .chezmoi.os "linux" }}
-dot_config/hypr
-dot_config/hypr/**
+# Linux-only files
 .config/hypr
 .config/hypr/**
-dot_config/waybar
-dot_config/waybar/**
+dot_config/hypr
+dot_config/hypr/**
 .config/waybar
 .config/waybar/**
-dot_config/wofi
-dot_config/wofi/**
+dot_config/waybar
+dot_config/waybar/**
 .config/wofi
 .config/wofi/**
-dot_config/mako
-dot_config/mako/**
+dot_config/wofi
+dot_config/wofi/**
 .config/mako
 .config/mako/**
-dot_config/keyd
-dot_config/keyd/**
+dot_config/mako
+dot_config/mako/**
 .config/keyd
 .config/keyd/**
+dot_config/keyd
+dot_config/keyd/**
 packages-arch.txt
 {{- end }}
 
