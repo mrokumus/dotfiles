@@ -22,6 +22,14 @@ defaults write NSGlobalDomain KeyRepeat -int 2
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 defaults write NSGlobalDomain com.apple.keyboard.fnState -bool true
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 1
+
+# Disable auto-correct and text substitutions
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 
 # Dialogs
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
@@ -34,6 +42,7 @@ defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock tilesize -int 25
 defaults write com.apple.dock orientation -string "left"
 defaults write com.apple.dock show-recents -bool false
+defaults write com.apple.dock mru-spaces -bool false
 
 # Finder
 defaults write com.apple.finder AppleShowAllFiles -bool true
@@ -50,14 +59,6 @@ mkdir -p "$HOME/Pictures/Screenshots"
 defaults write com.apple.screencapture location -string "$HOME/Pictures/Screenshots"
 defaults write com.apple.screencapture type -string "png"
 defaults write com.apple.screencapture show-thumbnail -bool false
-
-# Mission Control — do not rearrange spaces based on recent use
-defaults write com.apple.dock mru-spaces -bool false
-
-# Disable auto-correct and auto-capitalize
-defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
-defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
-defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
 
 # Avoid .DS_Store on network/USB drives
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
