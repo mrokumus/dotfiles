@@ -1,0 +1,20 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Remove Linux-only config directories from macOS machines.
+# Chezmoi ignores these files on macOS, but it does not automatically delete
+# directories that were created by an older/broken config.
+
+for dir in \
+  "$HOME/.config/hypr" \
+  "$HOME/.config/waybar" \
+  "$HOME/.config/wofi" \
+  "$HOME/.config/mako" \
+  "$HOME/.config/keyd"
+do
+  if [ -d "$dir" ]; then
+    rm -rf "$dir"
+  fi
+done
+{{- end }}
