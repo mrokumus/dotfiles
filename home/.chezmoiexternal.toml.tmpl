@@ -28,3 +28,12 @@
     url = "mrokumus:mrokumus/dotfiles-jotform.git"
     refreshPeriod = "168h"
 {{- end }}
+
+# Personal private configs — all non-Jotform personal machines.
+# Keep local LLM tooling, private scripts, and personal-only packages here.
+{{- if ne .chezmoi.hostname "jotform" }}
+[".config/personal-private"]
+    type = "git-repo"
+    url = "git@github.com:mrokumus/dotfiles-personal.git"
+    refreshPeriod = "168h"
+{{- end }}
