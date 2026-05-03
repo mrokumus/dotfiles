@@ -1,20 +1,33 @@
 {{- if ne .chezmoi.os "darwin" }}
 dot_Brewfile
+.Brewfile
 dot_config/private_karabiner
 dot_config/private_karabiner/**
+.config/private_karabiner
+.config/private_karabiner/**
 {{- end }}
 
 {{- if ne .chezmoi.os "linux" }}
 dot_config/hypr
 dot_config/hypr/**
+.config/hypr
+.config/hypr/**
 dot_config/waybar
 dot_config/waybar/**
+.config/waybar
+.config/waybar/**
 dot_config/wofi
 dot_config/wofi/**
+.config/wofi
+.config/wofi/**
 dot_config/mako
 dot_config/mako/**
+.config/mako
+.config/mako/**
 dot_config/keyd
 dot_config/keyd/**
+.config/keyd
+.config/keyd/**
 packages-arch.txt
 {{- end }}
 
