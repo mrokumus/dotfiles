@@ -5,6 +5,9 @@ set -euo pipefail
 # macOS defaults — runs once, re-runs if this file changes.
 # Some trackpad settings need both global and current-host domains.
 
+# Appearance
+defaults write NSGlobalDomain AppleInterfaceStyle -string "Dark"
+
 # Trackpad / mouse
 defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
@@ -18,7 +21,13 @@ defaults write NSGlobalDomain com.apple.trackpad.scaling -float 1.5
 defaults write NSGlobalDomain KeyRepeat -int 2
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
-defaults write NSGlobalDomain com.apple.keyboard.fnState -bool false
+defaults write NSGlobalDomain com.apple.keyboard.fnState -bool true
+
+# Dialogs
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 
 # Dock
 defaults write com.apple.dock autohide -bool true
@@ -32,6 +41,15 @@ defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
 defaults write com.apple.finder ShowPathbar -bool true
 defaults write com.apple.finder ShowStatusBar -bool true
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+
+# Screenshots
+mkdir -p "$HOME/Pictures/Screenshots"
+defaults write com.apple.screencapture location -string "$HOME/Pictures/Screenshots"
+defaults write com.apple.screencapture type -string "png"
+defaults write com.apple.screencapture show-thumbnail -bool false
 
 # Mission Control — do not rearrange spaces based on recent use
 defaults write com.apple.dock mru-spaces -bool false
@@ -41,8 +59,9 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
 defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
 
-# Avoid .DS_Store on network drives
+# Avoid .DS_Store on network/USB drives
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
 # Flycut
 defaults write com.generalarcade.flycut rememberNum -int 99
