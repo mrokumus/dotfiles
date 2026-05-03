@@ -1,3 +1,7 @@
+# Local/generated files
+.config/nvim/lazy-lock.json
+dot_config/nvim/lazy-lock.json
+
 {{- if ne .chezmoi.os "darwin" }}
 dot_Brewfile
 .Brewfile
