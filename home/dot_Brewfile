@@ -23,11 +23,12 @@ brew "pnpm"
 brew "python@3.12"
 brew "ripgrep"
 brew "starship"
-brew "tmux"
+
 brew "tree-sitter"
 
 # Terminals & editors
 cask "alacritty"
+cask "ghostty"
 cask "visual-studio-code"
 cask "zed"
 
