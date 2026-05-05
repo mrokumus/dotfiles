@@ -1,3 +1,5 @@
+TERM="xterm-256color"
+
 # Colors
 RED="\033[31m"
 GREEN="\033[32m"
