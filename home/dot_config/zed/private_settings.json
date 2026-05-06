@@ -100,6 +100,13 @@
     },
   },
   "languages": {
+    "Python": {
+      "language_servers": [
+        "basedpyright",
+        "ruff"
+      ],
+      "format_on_save": "on"
+    },
     "PHP": {
       "language_servers": [
         "phpcs",
@@ -167,6 +174,18 @@
           ],
         },
       },
+    },
+    "basedpyright": {
+      "settings": {
+        "python": {
+          "pythonPath": ".venv/bin/python"
+        },
+        "basedpyright.analysis": {
+          "extraPaths": [
+            "src"
+          ]
+        }
+      }
     },
   },
 }
