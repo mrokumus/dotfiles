@@ -1,4 +1,9 @@
 {
+  "text_rendering_mode": "grayscale",
+  "minimap": {
+    "show": "never"
+  },
+  "mouse_wheel_zoom": true,
   "outline_panel": {
     "dock": "left"
   },
@@ -6,14 +11,18 @@
     "dock": "left"
   },
   "agent": {
+    "default_profile": "ask",
+    "default_model": {
+      "provider": "ollama",
+      "model": "qwen3.6:latest",
+      "enable_thinking": true
+    },
     "dock": "right",
     "favorite_models": [],
     "model_parameters": []
   },
   "agent_servers": {
-    "codex-acp": {
-      "type": "registry"
-    }
+    
   },
   "tab_bar": {
     "show_pinned_tabs_in_separate_row": false
@@ -40,9 +49,9 @@
   "autosave": "off",
   "formatter": "language_server",
   "format_on_save": "on",
-  "buffer_font_family": "Corsiva Hebrew",
+  "buffer_font_family": "JetBrainsMono Nerd Font",
   "vim_mode": false,
-  "icon_theme": "JetBrains New UI Icons (Dark)",
+  "icon_theme": "JetBrains Icons Dark",
   "telemetry": {
     "diagnostics": true,
     "metrics": false,
@@ -52,7 +61,7 @@
   },
   "base_keymap": "JetBrains",
   "buffer_font_size": 18.0,
-  "theme": "One Dark",
+  "theme": "Gruvbox Dark",
   "auto_update": true,
   "close_on_file_delete": true,
   "cursor_shape": "bar",
