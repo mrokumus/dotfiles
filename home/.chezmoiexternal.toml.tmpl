@@ -1,5 +1,11 @@
+# Tmux Plugin Manager — all machines, public repo
+[".config/tmux/plugins/tpm"]
+    type = "git-repo"
+    url = "https://github.com/tmux-plugins/tpm.git"
+    refreshPeriod = "168h"
+
 # Jotform private configs — only on jotform hostname.
-{{- if eq .chezmoi.hostname "jotform" }}
+{{- if eq .chezmoi.hostname "rasıt’s-MacBook-Pro" }}
 [".config/jotform-private"]
     type = "git-repo"
     url = "mrokumus:mrokumus/dotfiles-jotform.git"
@@ -7,7 +13,7 @@
 {{- end }}
 
 # Personal private configs — all non-Jotform personal machines.
-{{- if ne .chezmoi.hostname "jotform" }}
+{{- if ne .chezmoi.hostname "rasıt’s-MacBook-Pro" }}
 [".config/personal-private"]
     type = "git-repo"
     url = "git@github.com:mrokumus/dotfiles-personal.git"
