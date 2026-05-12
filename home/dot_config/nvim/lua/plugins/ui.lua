@@ -18,6 +18,7 @@ return {
 					treesitter = true,
 					gitsigns = true,
 					mason = true,
+					lualine = true,
 					native_lsp = {
 						enabled = true,
 						underlines = {
@@ -38,7 +39,7 @@ return {
 		event = "VeryLazy",
 		opts = {
 			options = {
-				theme = "catppuccin",
+				theme = "auto",
 				component_separators = "│",
 				section_separators = "",
 			},
