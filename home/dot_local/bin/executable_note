@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-VAULT="$HOME/notes"
+set -euo pipefail
+
+VAULT="${NOTES_VAULT:-$HOME/notes}"
 EDITOR_CMD="${EDITOR:-nvim}"
 
 slugify() {
@@ -14,94 +16,180 @@ month_name() {
 }
 
 week_of_month() {
+  local day
   day=$(date +"%-d")
   echo $(( (day - 1) / 7 + 1 ))
 }
 
-create_from_template() {
-  file="$1"
-  template="$2"
-  title="$3"
-  scope="$4"
-  area="$5"
+render_template() {
+  local template="$1"
+  local title="${2:-}"
+  local scope="${3:-}"
+  local area="${4:-}"
+
+  sed \
+    -e "s/{{date}}/$(date +%F)/g" \
+    -e "s/{{year}}/$(date +%Y)/g" \
+    -e "s/{{month}}/$(month_name)/g" \
+    -e "s/{{week}}/$(week_of_month)/g" \
+    -e "s/{{title}}/$title/g" \
+    -e "s/{{scope}}/$scope/g" \
+    -e "s/{{area}}/$area/g" \
+    "$template"
+}
+
+ensure_file() {
+  local file="$1"
+  local template="$2"
+  local title="${3:-}"
+  local scope="${4:-}"
+  local area="${5:-}"
 
   mkdir -p "$(dirname "$file")"
 
   if [ ! -f "$file" ]; then
-    sed \
-      -e "s/{{date}}/$(date +%F)/g" \
-      -e "s/{{year}}/$(date +%Y)/g" \
-      -e "s/{{month}}/$(month_name)/g" \
-      -e "s/{{week}}/$(week_of_month)/g" \
-      -e "s/{{title}}/$title/g" \
-      -e "s/{{scope}}/$scope/g" \
-      -e "s/{{area}}/$area/g" \
-      "$template" > "$file"
+    render_template "$template" "$title" "$scope" "$area" > "$file"
   fi
+}
 
+open_file() {
+  local file="$1"
   "$EDITOR_CMD" "$file"
 }
 
-case "$1" in
+jotform_week_path() {
+  echo "$VAULT/weekly/jotform/$(date +%Y)/$(month_name)/$(week_of_month).md"
+}
+
+personal_week_path() {
+  echo "$VAULT/weekly/personal/$(date +%Y)/$(month_name)/$(week_of_month).md"
+}
+
+personal_day_path() {
+  echo "$VAULT/daily/personal/$(date +%F).md"
+}
+
+case "${1:-}" in
   jw|jotform-week)
-    year=$(date +"%Y")
-    month=$(month_name)
-    week=$(week_of_month)
-    create_from_template \
-      "$VAULT/weekly/jotform/$year/$month/$week.md" \
-      "$VAULT/templates/jotform-weekly.md" \
-      "" \
-      "work" \
-      ""
+    file="$(jotform_week_path)"
+    ensure_file "$file" "$VAULT/templates/jotform-weekly.md" "" "work" ""
+    open_file "$file"
     ;;
 
   pw|personal-week)
-    year=$(date +"%Y")
-    month=$(month_name)
-    week=$(week_of_month)
-    create_from_template \
-      "$VAULT/weekly/personal/$year/$month/$week.md" \
-      "$VAULT/templates/personal-weekly.md" \
-      "" \
-      "personal" \
-      ""
+    file="$(personal_week_path)"
+    ensure_file "$file" "$VAULT/templates/personal-weekly.md" "" "personal" ""
+    open_file "$file"
     ;;
 
   pd|personal-day)
-    create_from_template \
-      "$VAULT/daily/personal/$(date +%F).md" \
-      "$VAULT/templates/personal-daily.md" \
-      "" \
-      "personal" \
-      ""
+    file="$(personal_day_path)"
+    ensure_file "$file" "$VAULT/templates/personal-daily.md" "" "personal" ""
+    open_file "$file"
     ;;
 
   project)
-    scope="$2"
+    scope="${2:-}"
+
+    if [ -z "$scope" ]; then
+      echo "Missing scope."
+      echo "Example: note project jotform \"Custom Domain Management\""
+      exit 1
+    fi
+
     shift 2
     title="$*"
-    slug=$(slugify "$title")
 
-    create_from_template \
-      "$VAULT/projects/$scope/$slug.md" \
-      "$VAULT/templates/project.md" \
-      "$title" \
-      "$scope" \
-      ""
+    if [ -z "$title" ]; then
+      echo "Missing title."
+      echo "Example: note project jotform \"Custom Domain Management\""
+      exit 1
+    fi
+
+    slug="$(slugify "$title")"
+    file="$VAULT/projects/$scope/$slug.md"
+
+    ensure_file "$file" "$VAULT/templates/project.md" "$title" "$scope" ""
+    open_file "$file"
     ;;
 
   zk)
-    area="$2"
+    area="${2:-}"
+
+    if [ -z "$area" ]; then
+      echo "Missing area."
+      echo "Example: note zk development \"Domain Routing Patterns\""
+      exit 1
+    fi
+
     shift 2
     title="$*"
-    slug=$(slugify "$title")
 
-    create_from_template \
-      "$VAULT/zk/$area/$slug.md" \
-      "$VAULT/templates/zk.md" \
-      "$title" \
-      "" \
-      "$area"
+    if [ -z "$title" ]; then
+      echo "Missing title."
+      echo "Example: note zk development \"Domain Routing Patterns\""
+      exit 1
+    fi
+
+    slug="$(slugify "$title")"
+    file="$VAULT/zk/$area/$slug.md"
+
+    ensure_file "$file" "$VAULT/templates/zk.md" "$title" "" "$area"
+    open_file "$file"
+    ;;
+
+  ensure-path)
+    kind="${2:-}"
+
+    case "$kind" in
+      jw)
+        file="$(jotform_week_path)"
+        ensure_file "$file" "$VAULT/templates/jotform-weekly.md" "" "work" ""
+        echo "$file"
+        ;;
+
+      pw)
+        file="$(personal_week_path)"
+        ensure_file "$file" "$VAULT/templates/personal-weekly.md" "" "personal" ""
+        echo "$file"
+        ;;
+
+      pd)
+        file="$(personal_day_path)"
+        ensure_file "$file" "$VAULT/templates/personal-daily.md" "" "personal" ""
+        echo "$file"
+        ;;
+
+      *)
+        echo "Unknown ensure-path kind: $kind"
+        echo "Use: jw, pw, pd"
+        exit 1
+        ;;
+    esac
+    ;;
+
+  path)
+    kind="${2:-}"
+
+    case "$kind" in
+      jw)
+        echo "$(jotform_week_path)"
+        ;;
+
+      pw)
+        echo "$(personal_week_path)"
+        ;;
+
+      pd)
+        echo "$(personal_day_path)"
+        ;;
+
+      *)
+        echo "Unknown path kind: $kind"
+        echo "Use: jw, pw, pd"
+        exit 1
+        ;;
+    esac
     ;;
 
   *)
@@ -110,7 +198,14 @@ case "$1" in
     echo "  note pw"
     echo "  note pd"
     echo "  note project jotform \"Custom Domain Management\""
+    echo "  note project personal/ganyan-ai \"Experiment 001\""
     echo "  note zk development \"Domain Routing Patterns\""
+    echo "  note zk ai-ml \"Feature Leakage\""
+    echo ""
+    echo "Nvim helper:"
+    echo "  note ensure-path jw"
+    echo "  note ensure-path pw"
+    echo "  note ensure-path pd"
     exit 1
     ;;
 esac
