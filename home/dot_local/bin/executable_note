@@ -28,13 +28,13 @@ render_template() {
   local area="${4:-}"
 
   sed \
-    -e "s/{{date}}/$(date +%F)/g" \
-    -e "s/{{year}}/$(date +%Y)/g" \
-    -e "s/{{month}}/$(month_name)/g" \
-    -e "s/{{week}}/$(week_of_month)/g" \
-    -e "s/{{title}}/$title/g" \
-    -e "s/{{scope}}/$scope/g" \
-    -e "s/{{area}}/$area/g" \
+    -e "s|{{date}}|$(date +%F)|g" \
+    -e "s|{{year}}|$(date +%Y)|g" \
+    -e "s|{{month}}|$(month_name)|g" \
+    -e "s|{{week}}|$(week_of_month)|g" \
+    -e "s|{{title}}|$title|g" \
+    -e "s|{{scope}}|$scope|g" \
+    -e "s|{{area}}|$area|g" \
     "$template"
 }
 
@@ -138,35 +138,69 @@ case "${1:-}" in
     open_file "$file"
     ;;
 
-  ensure-path)
-    kind="${2:-}"
+    ensure-path)
+  kind="${2:-}"
 
-    case "$kind" in
-      jw)
-        file="$(jotform_week_path)"
-        ensure_file "$file" "$VAULT/templates/jotform-weekly.md" "" "work" ""
-        echo "$file"
-        ;;
+  case "$kind" in
+    jw)
+      file="$(jotform_week_path)"
+      ensure_file "$file" "$VAULT/templates/jotform-weekly.md" "" "work" ""
+      echo "$file"
+      ;;
 
-      pw)
-        file="$(personal_week_path)"
-        ensure_file "$file" "$VAULT/templates/personal-weekly.md" "" "personal" ""
-        echo "$file"
-        ;;
+    pw)
+      file="$(personal_week_path)"
+      ensure_file "$file" "$VAULT/templates/personal-weekly.md" "" "personal" ""
+      echo "$file"
+      ;;
 
-      pd)
-        file="$(personal_day_path)"
-        ensure_file "$file" "$VAULT/templates/personal-daily.md" "" "personal" ""
-        echo "$file"
-        ;;
+    pd)
+      file="$(personal_day_path)"
+      ensure_file "$file" "$VAULT/templates/personal-daily.md" "" "personal" ""
+      echo "$file"
+      ;;
 
-      *)
-        echo "Unknown ensure-path kind: $kind"
-        echo "Use: jw, pw, pd"
+    project)
+      scope="${3:-}"
+      shift 3
+      title="$*"
+
+      if [ -z "$scope" ] || [ -z "$title" ]; then
+        echo "Usage: note ensure-path project jotform \"Custom Domain Management\""
         exit 1
-        ;;
-    esac
-    ;;
+      fi
+
+      slug="$(slugify "$title")"
+      file="$VAULT/projects/$scope/$slug.md"
+
+      ensure_file "$file" "$VAULT/templates/project.md" "$title" "$scope" ""
+      echo "$file"
+      ;;
+
+    zk)
+      area="${3:-}"
+      shift 3
+      title="$*"
+
+      if [ -z "$area" ] || [ -z "$title" ]; then
+        echo "Usage: note ensure-path zk development \"Domain Routing Patterns\""
+        exit 1
+      fi
+
+      slug="$(slugify "$title")"
+      file="$VAULT/zk/$area/$slug.md"
+
+      ensure_file "$file" "$VAULT/templates/zk.md" "$title" "" "$area"
+      echo "$file"
+      ;;
+
+    *)
+      echo "Unknown ensure-path kind: $kind"
+      echo "Use: jw, pw, pd, project, zk"
+      exit 1
+      ;;
+  esac
+  ;;
 
   path)
     kind="${2:-}"
