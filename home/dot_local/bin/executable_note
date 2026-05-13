@@ -1,0 +1,116 @@
+#!/usr/bin/env bash
+
+VAULT="$HOME/notes"
+EDITOR_CMD="${EDITOR:-nvim}"
+
+slugify() {
+  echo "$*" \
+    | tr '[:upper:]' '[:lower:]' \
+    | sed -E 's/[^a-z0-9]+/-/g; s/^-|-$//g'
+}
+
+month_name() {
+  date +"%B"
+}
+
+week_of_month() {
+  day=$(date +"%-d")
+  echo $(( (day - 1) / 7 + 1 ))
+}
+
+create_from_template() {
+  file="$1"
+  template="$2"
+  title="$3"
+  scope="$4"
+  area="$5"
+
+  mkdir -p "$(dirname "$file")"
+
+  if [ ! -f "$file" ]; then
+    sed \
+      -e "s/{{date}}/$(date +%F)/g" \
+      -e "s/{{year}}/$(date +%Y)/g" \
+      -e "s/{{month}}/$(month_name)/g" \
+      -e "s/{{week}}/$(week_of_month)/g" \
+      -e "s/{{title}}/$title/g" \
+      -e "s/{{scope}}/$scope/g" \
+      -e "s/{{area}}/$area/g" \
+      "$template" > "$file"
+  fi
+
+  "$EDITOR_CMD" "$file"
+}
+
+case "$1" in
+  jw|jotform-week)
+    year=$(date +"%Y")
+    month=$(month_name)
+    week=$(week_of_month)
+    create_from_template \
+      "$VAULT/weekly/jotform/$year/$month/$week.md" \
+      "$VAULT/templates/jotform-weekly.md" \
+      "" \
+      "work" \
+      ""
+    ;;
+
+  pw|personal-week)
+    year=$(date +"%Y")
+    month=$(month_name)
+    week=$(week_of_month)
+    create_from_template \
+      "$VAULT/weekly/personal/$year/$month/$week.md" \
+      "$VAULT/templates/personal-weekly.md" \
+      "" \
+      "personal" \
+      ""
+    ;;
+
+  pd|personal-day)
+    create_from_template \
+      "$VAULT/daily/personal/$(date +%F).md" \
+      "$VAULT/templates/personal-daily.md" \
+      "" \
+      "personal" \
+      ""
+    ;;
+
+  project)
+    scope="$2"
+    shift 2
+    title="$*"
+    slug=$(slugify "$title")
+
+    create_from_template \
+      "$VAULT/projects/$scope/$slug.md" \
+      "$VAULT/templates/project.md" \
+      "$title" \
+      "$scope" \
+      ""
+    ;;
+
+  zk)
+    area="$2"
+    shift 2
+    title="$*"
+    slug=$(slugify "$title")
+
+    create_from_template \
+      "$VAULT/zk/$area/$slug.md" \
+      "$VAULT/templates/zk.md" \
+      "$title" \
+      "" \
+      "$area"
+    ;;
+
+  *)
+    echo "Usage:"
+    echo "  note jw"
+    echo "  note pw"
+    echo "  note pd"
+    echo "  note project jotform \"Custom Domain Management\""
+    echo "  note zk development \"Domain Routing Patterns\""
+    exit 1
+    ;;
+esac
