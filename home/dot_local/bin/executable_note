@@ -11,216 +11,65 @@ slugify() {
     | sed -E 's/[^a-z0-9]+/-/g; s/^-|-$//g'
 }
 
-month_name() {
-  date +"%B"
-}
-
-week_of_month() {
-  local day
-  day=$(date +"%-d")
-  echo $(( (day - 1) / 7 + 1 ))
-}
-
-render_template() {
-  local template="$1"
-  local title="${2:-}"
-  local scope="${3:-}"
-  local area="${4:-}"
-
-  sed \
-    -e "s|{{date}}|$(date +%F)|g" \
-    -e "s|{{year}}|$(date +%Y)|g" \
-    -e "s|{{month}}|$(month_name)|g" \
-    -e "s|{{week}}|$(week_of_month)|g" \
-    -e "s|{{title}}|$title|g" \
-    -e "s|{{scope}}|$scope|g" \
-    -e "s|{{area}}|$area|g" \
-    "$template"
+week_path() {
+  local offset
+  offset=$(( $(date +%u) - 1 ))
+  if [[ "$(uname)" == "Darwin" ]]; then
+    echo "$VAULT/journal/$(date -v-${offset}d +%F).md"
+  else
+    echo "$VAULT/journal/$(date -d "$offset days ago" +%F).md"
+  fi
 }
 
 ensure_file() {
   local file="$1"
   local template="$2"
-  local title="${3:-}"
-  local scope="${4:-}"
-  local area="${5:-}"
 
   mkdir -p "$(dirname "$file")"
-
   if [ ! -f "$file" ]; then
-    render_template "$template" "$title" "$scope" "$area" > "$file"
+    sed -e "s|{{date}}|$(date +%F)|g" "$template" > "$file"
   fi
 }
 
-open_file() {
-  local file="$1"
-  "$EDITOR_CMD" "$file"
-}
-
-jotform_week_path() {
-  echo "$VAULT/weekly/jotform/$(date +%Y)/$(month_name)/$(week_of_month).md"
-}
-
-personal_week_path() {
-  echo "$VAULT/weekly/personal/$(date +%Y)/$(month_name)/$(week_of_month).md"
-}
-
-personal_day_path() {
-  echo "$VAULT/daily/personal/$(date +%F).md"
-}
-
 case "${1:-}" in
-  jw|jotform-week)
-    file="$(jotform_week_path)"
-    ensure_file "$file" "$VAULT/templates/jotform-weekly.md" "" "work" ""
-    open_file "$file"
-    ;;
-
-  pw|personal-week)
-    file="$(personal_week_path)"
-    ensure_file "$file" "$VAULT/templates/personal-weekly.md" "" "personal" ""
-    open_file "$file"
-    ;;
-
-  pd|personal-day)
-    file="$(personal_day_path)"
-    ensure_file "$file" "$VAULT/templates/personal-daily.md" "" "personal" ""
-    open_file "$file"
-    ;;
-
-  project)
-    scope="${2:-}"
-
-    if [ -z "$scope" ]; then
-      echo "Missing scope."
-      echo "Example: note project jotform \"Custom Domain Management\""
-      exit 1
-    fi
-
-    shift 2
-    title="$*"
-
-    if [ -z "$title" ]; then
-      echo "Missing title."
-      echo "Example: note project jotform \"Custom Domain Management\""
-      exit 1
-    fi
-
-    slug="$(slugify "$title")"
-    file="$VAULT/projects/$scope/$slug.md"
-
-    ensure_file "$file" "$VAULT/templates/project.md" "$title" "$scope" ""
-    open_file "$file"
+  week)
+    file="$(week_path)"
+    ensure_file "$file" "$VAULT/templates/weekly.md"
+    "$EDITOR_CMD" "$file"
     ;;
 
   zk)
-    area="${2:-}"
-
-    if [ -z "$area" ]; then
-      echo "Missing area."
-      echo "Example: note zk development \"Domain Routing Patterns\""
-      exit 1
-    fi
-
-    shift 2
+    shift 1
     title="$*"
-
     if [ -z "$title" ]; then
       echo "Missing title."
-      echo "Example: note zk development \"Domain Routing Patterns\""
+      echo "Example: note zk \"Domain Routing Patterns\""
       exit 1
     fi
 
     slug="$(slugify "$title")"
-    file="$VAULT/zk/$area/$slug.md"
-
-    ensure_file "$file" "$VAULT/templates/zk.md" "$title" "" "$area"
-    open_file "$file"
+    file="$VAULT/zk/$slug.md"
+    ensure_file "$file" "$VAULT/templates/zk.md"
+    "$EDITOR_CMD" "$file"
     ;;
 
-    ensure-path)
-  kind="${2:-}"
-
-  case "$kind" in
-    jw)
-      file="$(jotform_week_path)"
-      ensure_file "$file" "$VAULT/templates/jotform-weekly.md" "" "work" ""
-      echo "$file"
-      ;;
-
-    pw)
-      file="$(personal_week_path)"
-      ensure_file "$file" "$VAULT/templates/personal-weekly.md" "" "personal" ""
-      echo "$file"
-      ;;
-
-    pd)
-      file="$(personal_day_path)"
-      ensure_file "$file" "$VAULT/templates/personal-daily.md" "" "personal" ""
-      echo "$file"
-      ;;
-
-    project)
-      scope="${3:-}"
-      shift 3
-      title="$*"
-
-      if [ -z "$scope" ] || [ -z "$title" ]; then
-        echo "Usage: note ensure-path project jotform \"Custom Domain Management\""
-        exit 1
-      fi
-
-      slug="$(slugify "$title")"
-      file="$VAULT/projects/$scope/$slug.md"
-
-      ensure_file "$file" "$VAULT/templates/project.md" "$title" "$scope" ""
-      echo "$file"
-      ;;
-
-    zk)
-      area="${3:-}"
-      shift 3
-      title="$*"
-
-      if [ -z "$area" ] || [ -z "$title" ]; then
-        echo "Usage: note ensure-path zk development \"Domain Routing Patterns\""
-        exit 1
-      fi
-
-      slug="$(slugify "$title")"
-      file="$VAULT/zk/$area/$slug.md"
-
-      ensure_file "$file" "$VAULT/templates/zk.md" "$title" "" "$area"
-      echo "$file"
-      ;;
-
-    *)
-      echo "Unknown ensure-path kind: $kind"
-      echo "Use: jw, pw, pd, project, zk"
-      exit 1
-      ;;
-  esac
-  ;;
-
-  path)
-    kind="${2:-}"
-
-    case "$kind" in
-      jw)
-        echo "$(jotform_week_path)"
+  ensure-path)
+    case "${2:-}" in
+      week)
+        file="$(week_path)"
+        ensure_file "$file" "$VAULT/templates/weekly.md"
+        echo "$file"
         ;;
-
-      pw)
-        echo "$(personal_week_path)"
+      zk)
+        shift 2
+        title="$*"
+        slug="$(slugify "$title")"
+        file="$VAULT/zk/$slug.md"
+        ensure_file "$file" "$VAULT/templates/zk.md"
+        echo "$file"
         ;;
-
-      pd)
-        echo "$(personal_day_path)"
-        ;;
-
       *)
-        echo "Unknown path kind: $kind"
-        echo "Use: jw, pw, pd"
+        echo "Use: week, zk"
         exit 1
         ;;
     esac
@@ -228,18 +77,8 @@ case "${1:-}" in
 
   *)
     echo "Usage:"
-    echo "  note jw"
-    echo "  note pw"
-    echo "  note pd"
-    echo "  note project jotform \"Custom Domain Management\""
-    echo "  note project personal/ganyan-ai \"Experiment 001\""
-    echo "  note zk development \"Domain Routing Patterns\""
-    echo "  note zk ai-ml \"Feature Leakage\""
-    echo ""
-    echo "Nvim helper:"
-    echo "  note ensure-path jw"
-    echo "  note ensure-path pw"
-    echo "  note ensure-path pd"
+    echo "  note week"
+    echo "  note zk \"Domain Routing Patterns\""
     exit 1
     ;;
 esac

@@ -2,7 +2,7 @@ vim.api.nvim_create_user_command("Note", function(opts)
   local args = opts.args
 
   if args == "" then
-    print("Usage: Note jw|pw|pd|project <scope> <title>|zk <area> <title>")
+    print("Usage: Note week | Note zk <title>")
     return
   end
 
@@ -19,25 +19,9 @@ end, {
   nargs = "*",
   complete = function(_, line)
     local parts = vim.split(line, "%s+")
-
     if #parts <= 2 then
-      return { "jw", "pw", "pd", "project", "zk" }
+      return { "week", "zk" }
     end
-
-    if parts[2] == "project" then
-      return {
-        "jotform",
-        "personal/ganyan-ai",
-        "personal/mimosa",
-        "personal/the-mortal-world",
-        "personal/crowlynx",
-      }
-    end
-
-    if parts[2] == "zk" then
-      return { "development", "ai-ml", "game-dev", "life" }
-    end
-
     return {}
   end,
 })
