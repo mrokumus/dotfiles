@@ -1,4 +1,6 @@
 {
+  "disable_ai": false,
+  "proxy": "",
   "text_rendering_mode": "grayscale",
   "minimap": {
     "show": "never"
@@ -124,6 +126,7 @@
       ],
     },
     "JavaScript": {
+      "tab_size": 2,
       "code_actions_on_format": {
         "source.fixAll.eslint": true,
       },

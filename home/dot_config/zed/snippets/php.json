@@ -31,5 +31,14 @@
       "<?php endif; ?>"
     ],
     "description": "PHP if template"
+  },
+  "PHP exit": {
+      "prefix": "pr",
+      "body": [
+       "echo '<pre>';",
+       "print_r($0);",
+       "echo '</pre>';",
+       "exit;"
+      ]
   }
 }
