@@ -2,7 +2,7 @@
 # hash: {{ include ".config/keyd/default.conf" | sha256sum }}
 {{ if eq .chezmoi.os "linux" -}}
 sudo mkdir -p /etc/keyd
-sudo cp ~/.config/keyd/default.conf /etc/keyd/default.conf
+sudo cp ~/dot_config/keyd/default.conf /etc/keyd/default.conf
 sudo systemctl enable --now keyd
 sudo systemctl restart keyd
 {{- end }}
