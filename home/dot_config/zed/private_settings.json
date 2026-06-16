@@ -1,4 +1,7 @@
 {
+  "vim": {
+    "toggle_relative_line_numbers": true
+  },
   "disable_ai": false,
   "proxy": "",
   "text_rendering_mode": "grayscale",
