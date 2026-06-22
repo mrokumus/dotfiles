@@ -12,3 +12,7 @@
 
 # Initialize Starship prompt
 command -v starship &>/dev/null && eval "$(starship init zsh)"
+
+if command -v tmux >/dev/null 2>&1 && [ -z "$TMUX" ] && [[ -o interactive ]]; then
+  exec tmux new-session -A -s main
+fi
