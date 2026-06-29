@@ -38,18 +38,18 @@ cachy() {
     return 1
   }
 
-  # --- wait until sshd is accepting connections (port probe, auth-independent) ---
+# --- wait until sshd is accepting connections (port probe, auth-independent) ---
   echo "waiting for $host to come up..."
   local waited=0
-  until nc -z -w 2 "$ip" 22 >/dev/null 2>&1; do
-    sleep 2
+  until command nc -z -w 2 "$ip" 22 >/dev/null 2>&1; do
+    /bin/sleep 2
     waited=$((waited + 2))
     if [ "$waited" -ge "$max_wait" ]; then
       echo "cachy: $host didn't respond after ${max_wait}s — plugged in? WOL armed? same subnet?" >&2
       return 1
     fi
-  done
-
+  done  
+ 
   echo "$host is up — connecting."
   ssh "$host"
 }
