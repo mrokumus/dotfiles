@@ -104,7 +104,6 @@ gaps.outer.right =      2
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#layout
     alt-slash = 'layout tiles horizontal vertical'
-    alt-comma = 'layout accordion horizontal vertical'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#focus
     alt-h = 'focus left'
@@ -155,6 +154,7 @@ gaps.outer.right =      2
 [mode.service.binding]
     esc = ['reload-config', 'mode main']
     r = ['flatten-workspace-tree', 'mode main'] # reset layout
+    a = ['layout accordion horizontal vertical', 'mode main']
     f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
     backspace = ['close-all-windows-but-current', 'mode main']
 
