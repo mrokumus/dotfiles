@@ -5,7 +5,7 @@
     refreshPeriod = "168h"
 
 # Jotform private configs — only on jotform hostname.
-{{- if eq .chezmoi.hostname "rasıt’s-MacBook-Pro" }}
+{{- if eq .chezmoi.hostname "rasit" }}
 [".config/jotform-private"]
     type = "git-repo"
     url = "mrokumus:mrokumus/dotfiles-jotform.git"
@@ -13,7 +13,7 @@
 {{- end }}
 
 # Personal private configs — all non-Jotform personal machines.
-{{- if ne .chezmoi.hostname "rasıt’s-MacBook-Pro" }}
+{{- if ne .chezmoi.hostname "mrt" }}
 [".config/personal-private"]
     type = "git-repo"
     url = "git@github.com:mrokumus/dotfiles-personal.git"
