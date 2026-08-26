@@ -7,6 +7,9 @@
 # Import Work Configurations
 [ -f "$HOME/.config/jotform-private/work.zsh" ] && source "$HOME/.config/jotform-private/work.zsh"
 
+# Import Personal Configurations
+[ -f "$HOME/.config/personal-private/personal.zsh" ] && source "$HOME/.config/personal-private/personal.zsh"
+
 # Import Functions
 [ -f "$HOME/.config/zsh/functions.zsh" ] && source "$HOME/.config/zsh/functions.zsh"
 
