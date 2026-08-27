@@ -1,0 +1,5 @@
+{{- if eq .chezmoi.hostname "rasit" }}
+Include ~/.config/jotform-private/ssh/config
+{{- else if eq .chezmoi.hostname "mrt" }}
+Include ~/.config/personal-private/ssh/config
+{{- end }}
