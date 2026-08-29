@@ -13,7 +13,7 @@
 {{- end }}
 
 # Personal Mac
-{{- if eq .chezmoi.hostname "mrt" }}
+{{- if or (eq .chezmoi.hostname "mrt") (eq .chezmoi.hostname "cachyos") }}
 [".config/personal-private"]
     type = "git-repo"
     url = "git@github.com:mrokumus/dotfiles-personal.git"

@@ -1,5 +1,5 @@
 {{- if eq .chezmoi.hostname "jotform" }}
 Include ~/.config/jotform-private/ssh/config
-{{- else if eq .chezmoi.hostname "mrt" }}
+{{- else if or (eq .chezmoi.hostname "mrt") (eq .chezmoi.hostname "cachyos") }}
 Include ~/.config/personal-private/ssh/config
 {{- end }}
