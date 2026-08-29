@@ -10,10 +10,12 @@ dot_Brewfile
 .config/karabiner/**
 dot_config/private_karabiner
 dot_config/private_karabiner/**
+{{- if ne .chezmoi.hostname "cachyos" }}
 .config/personal-private
 .config/personal-private/**
 dot_config/private_personal-private
 dot_config/private_personal-private/**
+{{- end }}
 .config/scripts/dump-macos-settings.sh
 dot_config/scripts/dump-macos-settings.sh
 run_onchange_darwin-*.sh.tmpl
