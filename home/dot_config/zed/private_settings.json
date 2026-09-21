@@ -26,9 +26,7 @@
     "favorite_models": [],
     "model_parameters": []
   },
-  "agent_servers": {
-    
-  },
+  "agent_servers": {},
   "tab_bar": {
     "show_pinned_tabs_in_separate_row": false
   },
@@ -81,16 +79,16 @@
     }
   },
   "project_panel": {
+    "folder_indicator": "icon",
     "hide_hidden": false,
     "diagnostic_badges": true,
     "hide_gitignore": false,
     "auto_reveal_entries": false,
     "dock": "right",
     "button": true,
-    "default_width": 100.0,
+    "default_width": 350.0,
     "entry_spacing": "comfortable",
     "file_icons": true,
-    "folder_icons": true,
     "git_status": true,
     "indent_size": 20,
     "auto_fold_dirs": true,
@@ -102,7 +100,7 @@
       "on_drop": true,
       "on_paste": true,
     },
-    "hide_root": true,
+    "hide_root": false,
     "indent_guides": {
       "show": "always",
     },
