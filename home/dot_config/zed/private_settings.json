@@ -33,7 +33,7 @@
   "restore_on_startup": "launchpad",
   "buffer_font_weight": 400.0,
   "ui_font_weight": 600.0,
-  "ui_font_family": "Corsiva Hebrew",
+  "ui_font_family": "Cascadia Code",
   "buffer_line_height": "comfortable",
   "edit_predictions": {
     "provider": "none"
@@ -46,15 +46,14 @@
   },
   "git_panel": {
     "dock": "left",
-    "sort_by_path": false,
     "tree_view": true
   },
   "autosave": "off",
   "formatter": "language_server",
   "format_on_save": "on",
-  "buffer_font_family": "JetBrainsMono Nerd Font",
+  "buffer_font_family": "Cascadia Code",
   "vim_mode": false,
-  "icon_theme": "Catppuccin Frappé",
+  "icon_theme": "Zed (Default)",
   "telemetry": {
     "diagnostics": true,
     "metrics": false,
@@ -63,8 +62,8 @@
     "trust_all_worktrees": true,
   },
   "base_keymap": "JetBrains",
-  "buffer_font_size": 18.0,
-  "theme": "Catppuccin Frappé",
+  "buffer_font_size": 20.0,
+  "theme": "Ayu Mirage",
   "auto_update": true,
   "close_on_file_delete": true,
   "cursor_shape": "bar",
@@ -72,8 +71,12 @@
   "terminal": {
     "cursor_shape": "bar",
     "blinking": "on",
-    "font_size": 16,
-    "font_family": "D2CodingLigature Nerd Font",
+    "font_size": 17,
+    "font_family": "Cascadia Code",
+    "font_fallbacks": [
+      "Apple Color Emoji",
+      "D2KodingLigature Nerd Font"
+    ],
     "scrollbar": {
       "show": "never"
     }
@@ -87,10 +90,10 @@
     "dock": "right",
     "button": true,
     "default_width": 350.0,
-    "entry_spacing": "comfortable",
+    "entry_spacing": "standard",
     "file_icons": true,
     "git_status": true,
-    "indent_size": 20,
+    "indent_size": 25,
     "auto_fold_dirs": true,
     "bold_folder_labels": true,
     "drag_and_drop": true,
