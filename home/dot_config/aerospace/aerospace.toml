@@ -165,3 +165,11 @@ gaps.outer.right =      0
     alt-shift-j = ['join-with down', 'mode main']
     alt-shift-k = ['join-with up', 'mode main']
     alt-shift-l = ['join-with right', 'mode main']
+
+[[on-window-detected]]
+if.app-id = 'com.tinyapp.TablePlus'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = "com.mitchellh.ghostty"
+run = 'layout floating'
