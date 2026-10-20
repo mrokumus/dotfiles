@@ -103,6 +103,7 @@ gaps.outer.right =      0
     # 'tell application "Terminal" to tell (do script) to activate' '''
     
     alt-t = 'layout tiles accordion'
+    alt-g = 'focus --wrap-around dfs-next'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#layout
     alt-slash = 'layout tiles horizontal vertical'
